@@ -1,17 +1,17 @@
-// 8-hbtn_class.js
-
 class HolbertonClass {
   constructor(size, location) {
       this._size = size;
       this._location = location;
   }
 
-  valueOf() {
+  [Symbol.toPrimitive](hint) {
+    if (hint === 'number') {
       return this._size;
-  }
-
-  toString() {
+    }
+    if (hint === 'string') {
       return this._location;
+    }
+    return this;
   }
 }
 
