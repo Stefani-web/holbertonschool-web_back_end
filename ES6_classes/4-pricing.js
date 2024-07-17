@@ -6,14 +6,16 @@ class Pricing {
     this._currency = currency;
   }
 
+  // amount
   get amount() {
     return this._amount;
   }
 
-  set amount(newAmount) {
-    this._amount = newAmount;
+  set amount(amount) {
+    if (typeof amount === 'number') this._amount = amount;
   }
 
+  // currency
   get currency() {
     return this._currency;
   }
