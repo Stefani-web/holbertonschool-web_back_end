@@ -14,7 +14,6 @@ The "web_back_end" project aims to provide a solid foundation for developing hig
 - **Node.js**: Server-side JavaScript execution environment.
 - **Express.js**: Web framework for Node.js that makes it easy to create servers and APIs.
 - **ES6**: Using modern JavaScript features for cleaner and maintainable code.
-- **MongoDB**: NoSQL database for data storage.
 - **JWT**: JSON Web Tokens for secure user authentication.
 
 ## Features
