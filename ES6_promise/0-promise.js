@@ -1,5 +1,5 @@
 export default function getResponseFromAPI() {
   return new Promise((resolve) => {
-      resolve('API response');
+    resolve('API response');
   });
 }
