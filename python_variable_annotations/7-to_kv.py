@@ -1,5 +1,11 @@
-from typing import Union, Tuple
+#!/usr/bin/env python3
+"""Module for Complex types - string and int/float to tuple"""
+
+
+from typing import Tuple, Union
 
 
 def to_kv(k: str, v: Union[int, float]) -> Tuple[str, float]:
-    return (k, float(v**2))
+    """Create a tuple using string and numbers"""
+    result: Tuple[str, float] = (k, v**2)
+    return result
