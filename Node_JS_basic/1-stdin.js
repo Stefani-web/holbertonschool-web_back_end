@@ -6,7 +6,13 @@ process.stdin.on('data', (input) => {
   const name = input.toString().trim(); // Removes leading and trailing whitespace
   console.log(`Your name is: ${name}`);
 
-  // Closes the program properly
+// If the input comes from a pipe (as with "echo"), close the program properly
+if (process.stdin.isTTY) {
+  // Interactive mode: no closing message, the program waits for the next entry
+  process.stdin.end();
+} else {
+  // Mode non interactif : message de fermeture et sortie
   console.log("This important software is now closing");
-  process.exit();  // Terminate the Node.js process
+  process.exit();
+}
 });
