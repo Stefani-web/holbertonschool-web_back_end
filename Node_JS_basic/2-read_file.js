@@ -5,7 +5,7 @@ function countStudents(filePath) {
     // Lire le fichier de manière synchrone
     const data = fs.readFileSync(filePath, 'utf8');
     // Diviser les lignes par retour à la ligne
-    const lines = data.split('\n').filter(line => line.trim() !== '');
+    const lines = data.split('\n').filter((line) => line.trim() !== '');
 
     // Vérifier qu'il y a des étudiants
     if (lines.length <= 1) {
@@ -14,14 +14,14 @@ function countStudents(filePath) {
     }
 
     // Enlever l'en-tête et créer un tableau pour les étudiants
-    const students = lines.slice(1).map(line => {
-      const [firstname, lastname, age, field] = line.split(',');
+    const students = lines.slice(1).map((line) => {
+      const [firstname, , , field] = line.split(','); // Ignorer lastname et age
       return { firstname, field };
     });
 
     // Compter les étudiants par domaine
     const fieldCount = {};
-    students.forEach(student => {
+    students.forEach((student) => {
       if (!fieldCount[student.field]) {
         fieldCount[student.field] = [];
       }
