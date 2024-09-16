@@ -17,11 +17,8 @@ const app = http.createServer((req, res) => {
 
     // Appeler la fonction countStudents de manière asynchrone
     countStudents(database)
-      .then((data) => {
-        res.write(`Number of students: ${data.total}\n`);
-        res.write(`Number of students in CS: ${data.cs.count}. List: ${data.cs.list.join(', ')}\n`);
-        res.write(`Number of students in SWE: ${data.swe.count}. List: ${data.swe.list.join(', ')}\n`);
-        res.end();
+      .then(() => {
+        res.end('Done');
       })
       .catch((error) => {
         res.end(error.message);
