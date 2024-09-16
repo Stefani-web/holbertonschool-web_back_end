@@ -11,7 +11,7 @@ if (process.stdin.isTTY) {
   // Interactive mode: no closing message, the program waits for the next entry
   process.stdin.end();
 } else {
-  // Mode non interactif : message de fermeture et sortie
+  // Non-interactive mode: close message and exit
   console.log("This important software is now closing");
   process.exit();
 }
