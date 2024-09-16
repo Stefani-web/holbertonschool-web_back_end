@@ -4,13 +4,16 @@
 	"description": "",
 	"main": "0-console.js",
 	"scripts": {
-	  "test": "mocha --require babel-register --exit 1-stdin.test.js"
+		"test": "mocha --require babel-register --exit 1-stdin.js"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
-	  "babel-register": "^6.26.0",
-	  "mocha": "^9.0.0"
+		"babel-register": "^6.26.0",
+		"mocha": "^9.0.0"
+	},
+	"dependencies": {
+		"glob": "^11.0.0"
 	}
-  }
+}
