@@ -1,8 +1,9 @@
 const http = require('http');
 const url = require('url');
-const countStudents = require('./3-read_file_async'); // Importer la fonction depuis 3-read_file_async.js
+const countStudents = require('./3-read_file_async'); // Fonction pour lire le fichier des étudiants
 
-const database = process.argv[2]; // Obtenir le chemin de la base de données depuis les arguments
+// Ajout d'une ligne vide pour respecter ESLint
+const database = process.argv[2]; // Obtenir le chemin du fichier CSV depuis les arguments
 
 // Créer le serveur HTTP
 const app = http.createServer((req, res) => {
@@ -15,13 +16,16 @@ const app = http.createServer((req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
     res.write('This is the list of our students\n');
 
-    // Appeler la fonction countStudents de manière asynchrone
+    // Appel de la fonction countStudents avec le fichier CSV
     countStudents(database)
-      .then(() => {
-        res.end('Done');
+      .then((output) => {
+        // Ajouter les détails des étudiants au message de réponse
+        res.write(output);
+        res.end();
       })
       .catch((error) => {
-        res.end(error.message);
+        res.write(error.message);
+        res.end();
       });
   } else {
     res.writeHead(404, { 'Content-Type': 'text/plain' });
@@ -29,10 +33,10 @@ const app = http.createServer((req, res) => {
   }
 });
 
-// Le serveur écoute sur le port 1245
+// Écouter sur le port 1245
 app.listen(1245, () => {
   console.log('Server is running on port 1245');
 });
 
-// Exporter l'application pour l'utiliser dans d'autres fichiers si nécessaire
+// Exporter le serveur pour une utilisation ultérieure
 module.exports = app;
