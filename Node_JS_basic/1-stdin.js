@@ -1,18 +1,11 @@
-// Displays a welcome message
-console.log('Welcome to Holberton School, what is your name?');
+process.stdout.write('Welcome to Holberton School, what is your name?\n');
 
-// Capture user input via STDIN
-process.stdin.on('data', (input) => {
-  const name = input.toString().trim(); // Removes leading and trailing whitespace
-  console.log(`Your name is: ${name}`);
+process.stdin.on('readable', () => {
+  const input = process.stdin.read();
 
-  // If the input comes from a pipe (as with "echo"), close the program properly
-  if (process.stdin.isTTY) {
-    // Interactive mode: no closing message, the program waits for the next entry
-    process.stdin.end();
-  } else {
-    // Non-interactive mode: close message and exit
-    console.log('This important software is now closing');
-    process.exit();
-  }
+  if (input !== null) process.stdout.write(`Your name is: ${input}`);
+});
+
+process.stdin.on('end', () => {
+  process.stdout.write('This important software is now closing\n');
 });
