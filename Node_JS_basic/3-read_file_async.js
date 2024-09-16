@@ -13,8 +13,11 @@ function countStudents(filePath) {
 
       // Vérifier qu'il y a des étudiants
       if (lines.length <= 1) {
-        console.log('Number of students: 0');
-        return resolve();// Ajout d'un return pour éviter l'erreur "Expected to return a value"
+        return resolve({
+          total: 0,
+          cs: { count: 0, list: [] },
+          swe: { count: 0, list: [] }
+        });
       }
 
       // Enlever l'en-tête et créer un tableau pour les étudiants
@@ -24,23 +27,23 @@ function countStudents(filePath) {
       });
 
       // Compter les étudiants par domaine
-      const fieldCount = {};
+      const fieldCount = {
+        CS: { count: 0, list: [] },
+        SWE: { count: 0, list: [] }
+      };
       students.forEach((student) => {
-        if (!fieldCount[student.field]) {
-          fieldCount[student.field] = [];
+        if (fieldCount[student.field]) {
+          fieldCount[student.field].count += 1;
+          fieldCount[student.field].list.push(student.firstname);
         }
-        fieldCount[student.field].push(student.firstname);
       });
 
-      // Afficher le nombre total d'étudiants
-      console.log(`Number of students: ${students.length}`);
-
-      // Afficher les étudiants par domaine
-      for (const [field, names] of Object.entries(fieldCount)) {
-        console.log(`Number of students in ${field}: ${names.length}. List: ${names.join(', ')}`);
-      }
-
-      return resolve();// Ajout d'un return pour s'assurer que la promesse est toujours résolue
+      // Résoudre la promesse avec les données structurées
+      resolve({
+        total: students.length,
+        cs: fieldCount.CS,
+        swe: fieldCount.SWE
+      });
     });
   });
 }
