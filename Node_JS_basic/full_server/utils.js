@@ -3,7 +3,7 @@ const fs = require('fs').promises;
 async function readDatabase(filePath) {
   try {
     const data = await fs.readFile(filePath, 'utf-8');
-    const lines = data.trim().split('\n').map(line => line.split(','));
+    const lines = data.trim().split('\n').map((line) => line.split(',')); // Ajout de parenthèses ici
     const result = {};
 
     for (const [firstName, field] of lines) {
