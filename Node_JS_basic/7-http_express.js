@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 app.get('/students', (req, res) => {
   // Écriture de la première ligne de la réponse
   res.write('This is the list of our students\n');
-  // Apl de la fonction countStudents pour lire et traiter le fichier de base de données
+  // Appel de la fonction countStudents pour lire et traiter le fichier de base de données
   countStudents(filePath)
     .then((data) => {
       // Écriture des données des étudiants dans la réponse
