@@ -1,38 +1,41 @@
 const fs = require('fs');
 
-function countStudents(path) {
+function countStudents(filePath) {
   try {
-    // Lire le fichier synchroniquement
-    const data = fs.readFileSync(path, 'utf8');
-
-    // Séparer le contenu en lignes
+    // Lire le fichier de manière synchrone
+    const data = fs.readFileSync(filePath, 'utf8');
+    // Diviser les lignes par retour à la ligne
     const lines = data.split('\n').filter(line => line.trim() !== '');
 
-    // Enlever l'en-tête et compter les étudiants
-    const students = lines.slice(1); // Enlever la première ligne (en-tête)
-    const totalStudents = students.length;
-
-    // Créer un objet pour stocker le nombre d'étudiants par domaine
-    const fields = {};
-
-    // Remplir les données dans l'objet fields
-    for (const student of students) {
-      const [firstName, field] = student.split(',');
-
-      if (fields[field]) {
-        fields[field].push(firstName);
-      } else {
-        fields[field] = [firstName];
-      }
+    // Vérifier qu'il y a des étudiants
+    if (lines.length <= 1) {
+      console.log('Number of students: 0');
+      return;
     }
 
-    // Afficher les résultats
-    console.log(`Number of students: ${totalStudents}`);
-    for (const [field, names] of Object.entries(fields)) {
+    // Enlever l'en-tête et créer un tableau pour les étudiants
+    const students = lines.slice(1).map(line => {
+      const [firstname, lastname, age, field] = line.split(',');
+      return { firstname, field };
+    });
+
+    // Compter les étudiants par domaine
+    const fieldCount = {};
+    students.forEach(student => {
+      if (!fieldCount[student.field]) {
+        fieldCount[student.field] = [];
+      }
+      fieldCount[student.field].push(student.firstname);
+    });
+
+    // Afficher le nombre total d'étudiants
+    console.log(`Number of students: ${students.length}`);
+
+    // Afficher les étudiants par domaine
+    for (const [field, names] of Object.entries(fieldCount)) {
       console.log(`Number of students in ${field}: ${names.length}. List: ${names.join(', ')}`);
     }
   } catch (error) {
-    // Si le fichier n'est pas accessible
     throw new Error('Cannot load the database');
   }
 }
