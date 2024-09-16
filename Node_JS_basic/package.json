@@ -1,0 +1,16 @@
+{
+	"name": "node_js_basic",
+	"version": "1.0.0",
+	"description": "",
+	"main": "0-console.js",
+	"scripts": {
+	  "test": "mocha --require babel-register --exit 1-stdin.test.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+	  "babel-register": "^6.26.0",
+	  "mocha": "^9.0.0"
+	}
+  }
