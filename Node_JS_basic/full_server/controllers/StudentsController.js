@@ -33,9 +33,9 @@ class StudentsController {
     try {
       const students = await readDatabase(database);
       const list = students[major] || [];
-      res.status(200).send(`List: ${list.join(', ')}`);
+      return res.status(200).send(`List: ${list.join(', ')}`);
     } catch (error) {
-      res.status(500).send('Cannot load the database');
+      return res.status(500).send('Cannot load the database');
     }
   }
 }
