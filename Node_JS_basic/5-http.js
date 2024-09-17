@@ -63,7 +63,7 @@ const app = http.createServer(async (req, res) => {
       if (studentsData) {
         res.write(`Number of students: ${studentsData.totalStudents}\n`);
         res.write(`Number of students in CS: ${studentsData.cs.count}. List: ${studentsData.cs.list.join(', ')}\n`);
-        res.write(`Number of students in SWE: ${studentsData.swe.count}. List: ${studentsData.swe.list.join(', ')}\n`);
+        res.write(`Number of students in SWE: ${studentsData.swe.count}. List: ${studentsData.swe.list.join(', ')}`);
       } else {
         throw new Error('Cannot parse students data');
       }
