@@ -1,9 +1,9 @@
-const { readDatabase } = require('../utils'); // Assure-toi que l'importation est correcte
+const { readDatabase } = require('../utils');  // Assure-toi que l'importation est correcte
 
 class StudentsController {
   // Endpoint GET /students
   static async getAllStudents(req, res) {
-    const database = req.app.get('database'); // Récupérer la base de données configurée dans Express
+    const database = req.app.get('database');  // Récupérer la base de données configurée dans Express
 
     if (!database) {
       console.error('Database not provided!');
@@ -33,10 +33,10 @@ class StudentsController {
   // Endpoint GET /students/:major
   static async getAllStudentsByMajor(req, res) {
     const { major } = req.params;
-    const database = req.app.get('database'); // Récupérer la base de données
+    const database = req.app.get('database');  // Récupérer la base de données
 
     if (!['CS', 'SWE'].includes(major)) {
-      return res.status(400).send('Major parameter must be CS or SWE'); // Code 400 pour mauvaise requête
+      return res.status(400).send('Major parameter must be CS or SWE');  // Code 400 pour mauvaise requête
     }
 
     if (!database) {
