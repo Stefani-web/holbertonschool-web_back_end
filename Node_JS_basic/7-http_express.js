@@ -20,7 +20,7 @@ app.get('/students', (req, res) => {
   const database = process.argv[2];
   if (!database) {
     // Si aucun fichier de base de données n'est fourni, réponse avec un message d'erreur
-    res.status(500).send('Cannot load the database');
+    res.status(500).send('This is the list of our students\nCannot load the database');
     return;
   }
 
@@ -30,7 +30,7 @@ app.get('/students', (req, res) => {
   fs.readFile(filePath, 'utf8', (err, data) => {
     if (err) {
       // En cas d'erreur de lecture, réponse avec un message d'erreur
-      res.status(500).send('Cannot load the database');
+      res.status(500).send('This is the list of our students\nCannot load the database');
       return;
     }
 
@@ -54,7 +54,7 @@ app.get('/students', (req, res) => {
       res.send(responseText);
     } catch (error) {
       // En cas d'erreur de traitement des données, réponse avec un message d'erreur
-      res.status(500).send('Cannot load the database');
+      res.status(500).send('This is the list of our students\nCannot load the database');
     }
   });
 });
