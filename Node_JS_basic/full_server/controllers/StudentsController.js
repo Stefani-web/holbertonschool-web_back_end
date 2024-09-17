@@ -19,7 +19,7 @@ class StudentsController {
 
       return res.status(200).send(response.trim());
     } catch (error) {
-      return res.status(500).send('This is the list of our students\nCannot load the database');
+      return res.status(500).send('Cannot load the database');
     }
   }
 
@@ -28,7 +28,7 @@ class StudentsController {
     const database = req.app.get('database');
 
     if (!['CS', 'SWE'].includes(major)) {
-      return res.status(400).send('Major parameter must be CS or SWE');
+      return res.status(500).send('Major parameter must be CS or SWE');
     }
 
     try {
@@ -36,7 +36,7 @@ class StudentsController {
       const list = students[major] || [];
       return res.status(200).send(`List: ${list.join(', ')}`);
     } catch (error) {
-      return res.status(500).send('This is the list of our students\nCannot load the database');
+      return res.status(500).send('Cannot load the database');
     }
   }
 }
