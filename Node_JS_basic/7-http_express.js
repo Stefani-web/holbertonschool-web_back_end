@@ -34,23 +34,28 @@ app.get('/students', (req, res) => {
       return;
     }
 
-    // Séparation des lignes du fichier et filtrage des lignes vides
-    const lines = data.split('\n').filter((line) => line.trim() !== '');
-    // Extraction des données des étudiants à partir des lignes
-    const students = lines.slice(1).map((line) => line.split(','));
+    try {
+      // Séparation des lignes du fichier et filtrage des lignes vides
+      const lines = data.split('\n').filter((line) => line.trim() !== '');
+      // Extraction des données des étudiants à partir des lignes
+      const students = lines.slice(1).map((line) => line.split(','));
 
-    // Filtrage des étudiants par filière (CS et SWE)
-    const csStudents = students.filter((student) => student[3] === 'CS');
-    const sweStudents = students.filter((student) => student[3] === 'SWE');
+      // Filtrage des étudiants par filière (CS et SWE)
+      const csStudents = students.filter((student) => student[3] === 'CS');
+      const sweStudents = students.filter((student) => student[3] === 'SWE');
 
-    // Construction du texte de réponse
-    let responseText = 'This is the list of our students\n';
-    responseText += `Number of students: ${students.length}\n`;
-    responseText += `Number of students in CS: ${csStudents.length}. List: ${csStudents.map((student) => student[0]).join(', ')}\n`;
-    responseText += `Number of students in SWE: ${sweStudents.length}. List: ${sweStudents.map((student) => student[0]).join(', ')}`;
+      // Construction du texte de réponse
+      let responseText = 'This is the list of our students\n';
+      responseText += `Number of students: ${students.length}\n`;
+      responseText += `Number of students in CS: ${csStudents.length}. List: ${csStudents.map((student) => student[0]).join(', ')}\n`;
+      responseText += `Number of students in SWE: ${sweStudents.length}. List: ${sweStudents.map((student) => student[0]).join(', ')}`;
 
-    // Envoi de la réponse
-    res.send(responseText);
+      // Envoi de la réponse
+      res.send(responseText);
+    } catch (error) {
+      // En cas d'erreur de traitement des données, réponse avec un message d'erreur
+      res.status(500).send('Cannot load the database');
+    }
   });
 });
 
