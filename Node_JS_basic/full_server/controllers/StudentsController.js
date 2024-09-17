@@ -6,6 +6,7 @@ class StudentsController {
 
     try {
       const students = await readDatabase(database);
+      console.log('Students data:', students);
       let response = 'This is the list of our students\n';
 
       Object.keys(students)
@@ -16,7 +17,7 @@ class StudentsController {
           response += `Number of students in ${field}: ${studentCount}. List: ${studentList}\n`;
         });
 
-      res.status(200).send(response.trim());
+      res.status(200).send(response.trimEnd());
     } catch (error) {
       res.status(500).send('Cannot load the database');
     }
