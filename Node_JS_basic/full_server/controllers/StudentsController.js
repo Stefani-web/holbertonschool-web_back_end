@@ -28,7 +28,7 @@ class StudentsController {
     const database = req.app.get('database');
 
     if (!['CS', 'SWE'].includes(major)) {
-      return res.status(500).send('Major parameter must be CS or SWE');
+      return res.status(200).send('Major parameter must be CS or SWE');
     }
 
     try {
