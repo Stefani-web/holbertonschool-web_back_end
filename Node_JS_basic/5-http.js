@@ -8,7 +8,7 @@ const countStudents = (databasePath) => new Promise((resolve, reject) => {
       reject(new Error('Cannot load the database'));
     } else {
       const lines = data.split('\n').filter((line) => line.trim() !== ''); // Remove empty lines
-      const students = lines.map((line) => line.split(','));
+      const students = lines.slice(1).map((line) => line.split(',')); // Skip the first line (header)
 
       // Filter valid lines (those with 4 elements)
       const validStudents = students.filter((student) => student.length === 4);
