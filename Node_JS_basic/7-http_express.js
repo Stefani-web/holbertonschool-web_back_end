@@ -19,8 +19,8 @@ app.get('/students', (req, res) => {
   // Récupération du nom de la base de données depuis les arguments de la ligne de commande
   const database = process.argv[2];
   if (!database) {
-    // Si aucun fichier de base de données n'est fourni, réponse avec un message simple
-    res.send('This is the list of our students\n');
+    // Si aucun fichier de base de données n'est fourni, réponse avec un message d'erreur
+    res.status(500).send('Cannot load the database');
     return;
   }
 
